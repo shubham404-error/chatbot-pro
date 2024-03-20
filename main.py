@@ -62,10 +62,10 @@ if user_prompt:
 
 # Gemini Pro Vision functionality
 st.write("")
-gemini_vision = st.expander("VisionBot", expanded=False)
+gemini_vision = st.expander("VisionBot👁️", expanded=False)
 
 with gemini_vision:
-    st.header("👁️ AIHealthPro-Visionbot")
+    st.header("👁 AIHealthPro-Visionbot")
     st.write("")
     image_prompt = st.text_input("Interact with the Image", placeholder="Prompt", label_visibility="visible")
     uploaded_file = st.file_uploader("Choose an Image", accept_multiple_files=False, type=["png", "jpg", "jpeg", "img", "webp"])
