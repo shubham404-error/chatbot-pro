@@ -81,7 +81,7 @@ with gemini_vision:
         """, unsafe_allow_html=True)
 
         if st.button("GET RESPONSE", use_container_width=True):
-            model = genai.GenerativeModel("gemini-pro-vision")
+            model = gen_ai.GenerativeModel("gemini-pro-vision")
             if uploaded_file is not None:
                 if image_prompt != "":
                     image = Image.open(uploaded_file)
