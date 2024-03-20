@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import google.generativeai as gen_ai
 import google.ai.generativelanguage as glm
 from PIL import Image
+#from streamlit_option_menu import option_menu 
 
 def image_to_byte_array(image: Image) -> bytes:
     imgByteArr = io.BytesIO()
@@ -38,6 +39,14 @@ def translate_role_for_streamlit(user_role):
 # Initialize chat session in Streamlit if not already present
 if "chat_session" not in st.session_state:
     st.session_state.chat_session = model.start_chat(history=[])
+    
+#with st.sidebar:
+    '''
+    selected = option_menu('AIHealthPro Chatbot', 
+                           ['DocBot',
+                            'VisionBot'],
+                           icons=['health-worker','eye'],
+                           default_index=0)'''
 
 # Display the chatbot's title on the page
 st.title("🧑‍⚕️ AIHealthPro-Docbot")
