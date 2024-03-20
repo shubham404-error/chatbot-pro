@@ -41,12 +41,11 @@ if "chat_session" not in st.session_state:
     st.session_state.chat_session = model.start_chat(history=[])
     
 #with st.sidebar:
-    '''
-    selected = option_menu('AIHealthPro Chatbot', 
-                           ['DocBot',
-                            'VisionBot'],
-                           icons=['health-worker','eye'],
-                           default_index=0)'''
+    #selected = option_menu('AIHealthPro Chatbot', 
+                           #['DocBot',
+                            #'VisionBot'],
+                           #icons=['health-worker','eye'],
+                           #default_index=0)
 
 # Display the chatbot's title on the page
 st.title("🧑‍⚕️ AIHealthPro-Docbot")
