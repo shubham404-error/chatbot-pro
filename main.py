@@ -6,7 +6,9 @@ import google.generativeai as gen_ai
 import google.ai.generativelanguage as glm
 from PIL import Image
 from streamlit_option_menu import option_menu
-
+st.markdown("""
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+""", unsafe_allow_html=True)
 def image_to_byte_array(image: Image) -> bytes:
     imgByteArr = io.BytesIO()
     image.save(imgByteArr, format=image.format)
@@ -44,7 +46,7 @@ with st.sidebar:
     selected = option_menu(
         menu_title="AIHealthPro Chatbot",
         options=["DocBot", "VisionBot"],
-        icons=["health-worker", "eye"],
+        icons=["fa-solid fa-user-doctor", "eye"],
         default_index=0,
         orientation="vertical",
     )
