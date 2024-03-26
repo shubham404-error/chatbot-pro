@@ -44,7 +44,7 @@ with st.sidebar:
     selected = option_menu(
         menu_title="AIHealthPro Chatbot",
         options=["DocBot", "VisionBot"],
-        icons=["doctor", "eye"],
+        icons=["health-worker", "eye"],
         default_index=0,
         orientation="vertical",
     )
