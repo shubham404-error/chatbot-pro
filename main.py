@@ -6,7 +6,6 @@ import google.generativeai as gen_ai
 import google.ai.generativelanguage as glm
 from PIL import Image
 from streamlit_option_menu import option_menu
-from google.generativeai.types import BlockedReason, StopCandidateException
 
 def image_to_byte_array(image: Image) -> bytes:
     imgByteArr = io.BytesIO()
@@ -82,16 +81,12 @@ if selected == "DocBot":
         # Add user's message to chat and display it
         st.chat_message("user").markdown(user_prompt)
 
-        try:
-            # Send user's message to Gemini-Pro and get the response
-            gemini_response = st.session_state.chat_session.send_message(user_prompt)
+        # Send user's message to Gemini-Pro and get the response
+        gemini_response = st.session_state.chat_session.send_message(user_prompt)
 
-            # Display Gemini-Pro's response
-            with st.chat_message("assistant"):
-                st.markdown(gemini_response.text)
-        except (BlockedReason, StopCandidateException):
-            with st.chat_message("assistant"):
-                st.error("Sorry, I cannot answer explicit or inappropriate prompts. Please rephrase your query.")
+        # Display Gemini-Pro's response
+        with st.chat_message("assistant"):
+            st.markdown(gemini_response.text)
 
 elif selected == "VisionBot":
     st.header("👁 AIHealthPro-Visionbot")
@@ -115,27 +110,24 @@ elif selected == "VisionBot":
         if uploaded_file is not None:
             if image_prompt != "":
                 image = Image.open(uploaded_file)
-                try:
-                    response = model.generate_content(
-                        glm.Content(
-                            parts=[
-                                glm.Part(text=image_prompt),
-                                glm.Part(
-                                    inline_data=glm.Blob(
-                                        mime_type="image/jpeg",
-                                        data=image_to_byte_array(image)
-                                    )
+                response = model.generate_content(
+                    glm.Content(
+                        parts=[
+                            glm.Part(text=image_prompt),
+                            glm.Part(
+                                inline_data=glm.Blob(
+                                    mime_type="image/jpeg",
+                                    data=image_to_byte_array(image)
                                 )
-                            ]
-                        )
+                            )
+                        ]
                     )
-                    response.resolve()
-                    st.write("")
-                    st.write(":blue[Response]")
-                    st.write("")
-                    st.markdown(response.text)
-                except (BlockedReason, StopCandidateException):
-                    st.error("Sorry, I cannot analyze explicit or inappropriate images. Please try a different image.")
+                )
+                response.resolve()
+                st.write("")
+                st.write(":blue[Response]")
+                st.write("")
+                st.markdown(response.text)
             else:
                 st.write("")
                 st.header(":red[Please Provide a prompt]")
