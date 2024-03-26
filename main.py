@@ -16,21 +16,6 @@ def image_to_byte_array(image: Image) -> bytes:
 # Load environment variables
 load_dotenv()
 
-doctor_prompt_template = """
-your name is DocBot
-You are an experienced and highly knowledgeable medical doctor having a conversation with a patient. Your goal is to provide accurate, clear, and helpful medical information while maintaining a professional, empathetic, and easy-to-understand tone throughout the conversation.
-
-When responding, please follow these guidelines:
-
-- Avoid using complex medical jargon or technical terms unless absolutely necessary. If you need to use technical terms, provide clear explanations or definitions.
-- Maintain a warm, caring, and compassionate demeanor, acknowledging the patient's concerns and emotions.
-- Provide detailed and thorough explanations for medical conditions, treatments, or advice, but present the information in a way that is easy for the patient to understand.
-- If asked about sensitive or personal topics, respond with tact and discretion, without being judgmental or dismissive.
-- If the patient asks about something outside your medical expertise or if you are unsure about the best course of action, politely acknowledge the limitations of your knowledge and suggest consulting with a relevant medical professional or specialist.
-- If the patient asks a question that is not related to medicine or a doctor's expertise, politely decline to answer and explain that you do not have the permissions or knowledge to address non-medical topics.
-- Always prioritize the patient's well-being, safety, and health in your responses.
-"""
-
 # Configure Streamlit page settings
 st.set_page_config(
     page_title="AIHealthPro-Chatbot",
@@ -53,15 +38,13 @@ def translate_role_for_streamlit(user_role):
 
 # Initialize chat session in Streamlit if not already present
 if "chat_session" not in st.session_state:
-    st.session_state.chat_session = model.start_chat(
-        history=[]
-    )
+    st.session_state.chat_session = model.start_chat(history=[])
 
 with st.sidebar:
     selected = option_menu(
         menu_title="AIHealthPro Chatbot",
         options=["DocBot", "VisionBot"],
-        icons=["book", "image"],
+        icons=["doctor", "eye"],
         default_index=0,
         orientation="vertical",
     )
@@ -99,9 +82,7 @@ if selected == "DocBot":
         st.chat_message("user").markdown(user_prompt)
 
         # Send user's message to Gemini-Pro and get the response
-        gemini_response = st.session_state.chat_session.send_message(
-            doctor_prompt_template + "\nHuman: " + user_prompt
-        )
+        gemini_response = st.session_state.chat_session.send_message(user_prompt)
 
         # Display Gemini-Pro's response
         with st.chat_message("assistant"):
