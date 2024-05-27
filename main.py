@@ -205,7 +205,7 @@ elif selected == "FinanceBot":
 
     # Display the chatbot's title on the page
 
-    st.title(""💵 FinanceBot - Money Maven™")
+    st.title("💵 FinanceBot - Money Maven™")
 
 
 
