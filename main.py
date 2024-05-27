@@ -243,96 +243,52 @@ with st.sidebar:
         with st.chat_message("assistant"):
 
             st.markdown(gemini_response.text)
-    elif selected == "VisionBot":
-
-    st.header("👁 Visionbot-AIHealthPro™")
-
+            elif selected == "VisionBot":
+    st.header("👁 VisionBot - Money Maven")
     st.write("")
 
-
-
     image_prompt = st.text_input("Interact with the Image", placeholder="Prompt", label_visibility="visible")
-
     uploaded_file = st.file_uploader("Choose an Image", accept_multiple_files=False, type=["png", "jpg", "jpeg", "img", "webp"])
 
-
-
     if uploaded_file is not None:
-
         st.image(Image.open(uploaded_file), use_column_width=True)
-
         st.markdown("""
-
             <style>
-
             img {
-
                 border-radius: 10px;
-
             }
-
             </style>
-
         """, unsafe_allow_html=True)
 
-
-
     if st.button("GET RESPONSE", use_container_width=True):
-
         model = gen_ai.GenerativeModel("gemini-pro-vision")
-
         if uploaded_file is not None:
-
             if image_prompt != "":
-
                 image = Image.open(uploaded_file)
-
                 response = model.generate_content(
-
                     glm.Content(
-
                         parts=[
-
                             glm.Part(text=image_prompt),
-
                             glm.Part(
-
                                 inline_data=glm.Blob(
-
                                     mime_type="image/jpeg",
-
                                     data=image_to_byte_array(image)
-
                                 )
-
                             )
-
                         ]
-
                     ),
-
                     safety_settings=safety_settings
-
                 )
-
                 response.resolve()
-
                 st.write("")
-
                 st.write(":blue[Response]")
-
                 st.write("")
-
                 st.markdown(response.text)
-
             else:
-
                 st.write("")
-
                 st.header(":red[Please Provide a prompt]")
-
         else:
-
             st.write("")
-
             st.header(":red[Please Provide an image]")
+
+   
