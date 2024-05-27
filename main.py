@@ -95,12 +95,9 @@ safety_settings = [
 
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
-
-
 # Set up Google Gemini-Pro AI model
-
-model = genai.GenerativeModel("gemini-1.5-pro")
-
+gen_ai.configure(api_key=GOOGLE_API_KEY)
+model = gen_ai.GenerativeModel('gemini-pro')
 
 
 
