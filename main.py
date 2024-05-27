@@ -193,8 +193,7 @@ with st.sidebar:
         response = pipeline.call()
         st.write(response)
     
-
-elif selected == "DocBot":
+    elif selected == "DocBot":
 
     # Display the chatbot's title on the page
 
