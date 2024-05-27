@@ -2,7 +2,8 @@ import streamlit as st
 
 from pathlib import Path
 
-st.set_page_config(page_title="AIHealthPro Chatbot", page_icon=":brain:",layout="centered",)
+st.set_page_config(page_title="Money Maven Chatbot", page_icon="💰", layout="centered")
+
 
 st.image("logo.png",width=100)
 
@@ -170,8 +171,8 @@ with st.sidebar:
     question = st.text_input("Enter your question")
 
     system_prompt = """
-    You are a text summarizer who answers user query from the given CONTEXT.
-    You are a medical expert assistant who helps healthcare professionals understand and analyze medical reports. You can extract key findings, explain medical terminology, and answer questions related to diagnosis, treatment, and prognosis. 
+    You are a financial advisor who answers user queries from the given CONTEXT.
+    You help users understand and analyze financial reports. You can extract key findings, explain financial terminology, and answer questions related to budgeting, investments, and personal finance. 
     You are honest, to the point, coherent and don't hallucinate.
     If the user query is not in context, simply tell `We are sorry, we don't have information on this`.
     """
