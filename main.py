@@ -158,11 +158,11 @@ with st.sidebar:
 
     if selected == "FinanceBot":
 
-        st.write("🧑‍⚕️ **FinanceBot** - Engage in text-based medical conversations.")
+        st.write("🧑‍⚕️ **FinanceBot** -  Engage in text-based financial conversations.")
 
     elif selected == "VisionBot":
 
-        st.write("👁 **VisionBot** - Analyze and interpret medical images.")
+        st.write("👁 **VisionBot** - Analyze and interpret with images.")
     elif selected == "Chat with Report":
         st.write("📄 **Chat with Report** - Ask questions about uploaded documents.")
 
@@ -178,8 +178,8 @@ if selected == "Chat with Report":
     question = st.text_input("Enter your question")
 
     system_prompt = """
-    You are a text summarizer who answers user query from the given CONTEXT.
-    You are a medical expert assistant who helps healthcare professionals understand and analyze medical reports. You can extract key findings, explain medical terminology, and answer questions related to diagnosis, treatment, and prognosis. 
+    You are a financial advisor who answers user queries from the given CONTEXT.
+    You help users understand and analyze financial reports. You can extract key findings, explain financial terminology, and answer questions related to budgeting, investments, and personal finance. 
     You are honest, to the point, coherent and don't hallucinate.
     If the user query is not in context, simply tell `We are sorry, we don't have information on this`.
     """
@@ -221,7 +221,7 @@ elif selected == "FinanceBot":
 
     # Input field for user's message
 
-    user_prompt = st.chat_input("Ask DocBot...")
+    user_prompt = st.chat_input("Ask FinanceBot💸...")
 
 
 
@@ -259,7 +259,7 @@ elif selected == "FinanceBot":
 
 elif selected == "VisionBot":
 
-    st.header("👁 Visionbot-AIHealthPro™")
+    st.header("👁 Visionbot-MoneyMaven™")
 
     st.write("")
 
