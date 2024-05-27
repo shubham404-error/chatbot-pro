@@ -93,15 +93,9 @@ safety_settings = [
 
 
 
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
-
-
-
-# Set up Google Gemini-Pro AI model
-
 gen_ai.configure(api_key=GOOGLE_API_KEY)
-
-model = gen_ai.GenerativeModel('gemini-pro')
+version = 'models/gemini-1.5-flash-latest'
+model = genai.GenerativeModel(version)
 
 
 
@@ -129,9 +123,9 @@ if "chat_session" not in st.session_state:
 
 with st.sidebar:
     selected = option_menu(
-        menu_title="AIHealthPro Chatbot",
-        options=["DocBot", "VisionBot", "Chat with Report"],  # Add the new option
-        icons=["robot", "eye", "file-earmark-text"],  # Add an icon for the new option
+        menu_title="Money Maven Chatbot",
+        options=["FinanceBot", "VisionBot", "Chat with Report"],
+        icons=["wallet", "eye", "file-earmark-text"],  # Add an icon for the new option
         default_index=0,
         orientation="vertical",
 )
@@ -160,18 +154,12 @@ with st.sidebar:
 
 
 
-    if selected == "DocBot":
-
-        st.write("🧑‍⚕️ **DocBot** - Engage in text-based medical conversations.")
-
+    if selected == "FinanceBot":
+        st.write("💵 **FinanceBot** - Engage in text-based financial conversations.")
     elif selected == "VisionBot":
-
-        st.write("👁 **VisionBot** - Analyze and interpret medical images.")
+        st.write("👁 **VisionBot** - Analyze and interpret financial documents.")
     elif selected == "Chat with Report":
-        st.write("📄 **Chat with Report** - Ask questions about uploaded documents.")
-
-if selected == "Chat with Report":
-    st.title("📄 Chat with Report")
+        st.write("📄 **Chat with Report** - Ask questions about uploaded financial reports.")
     # Ensure the API key is loaded correctly
     google_api_key = os.getenv("GOOGLE_API_KEY")
     if not google_api_key:
