@@ -125,9 +125,9 @@ if "chat_session" not in st.session_state:
 
 with st.sidebar:
     selected = option_menu(
-        menu_title="AIHealthPro Chatbot",
-        options=["DocBot", "VisionBot", "Chat with Report"],  # Add the new option
-        icons=["robot", "eye", "file-earmark-text"],  # Add an icon for the new option
+        menu_title="Money Maven Chatbot",
+        options=["FinanceBot", "VisionBot", "Chat with Report"],
+        icons=["wallet", "eye", "file-earmark-text"],
         default_index=0,
         orientation="vertical",
 )
@@ -156,9 +156,9 @@ with st.sidebar:
 
 
 
-    if selected == "DocBot":
+    if selected == "FinanceBot":
 
-        st.write("🧑‍⚕️ **DocBot** - Engage in text-based medical conversations.")
+        st.write("🧑‍⚕️ **FinanceBot** - Engage in text-based medical conversations.")
 
     elif selected == "VisionBot":
 
@@ -201,11 +201,11 @@ if selected == "Chat with Report":
         st.write(response)
     
 
-elif selected == "DocBot":
+elif selected == "FinanceBot":
 
     # Display the chatbot's title on the page
 
-    st.title("🧑‍⚕️ Docbot-AIHealthPro™")
+    st.title(""💵 FinanceBot - Money Maven™")
 
 
 
