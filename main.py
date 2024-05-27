@@ -1,9 +1,7 @@
 import streamlit as st
 
 from pathlib import Path
-
 st.set_page_config(page_title="Money Maven Chatbot", page_icon="💰", layout="centered")
-
 
 st.image("logo.png",width=100)
 
@@ -196,8 +194,7 @@ with st.sidebar:
     elif selected == "DocBot":
 
     # Display the chatbot's title on the page
-
-    st.title("🧑‍⚕️ Docbot-AIHealthPro™")
+        st.title("🧑‍⚕️ Docbot-AIHealthPro™")
 
 
 
