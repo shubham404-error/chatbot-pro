@@ -1,7 +1,8 @@
 import streamlit as st
 
 from pathlib import Path
-st.set_page_config(page_title="Money Maven Chatbot", page_icon="💰", layout="centered")
+
+st.set_page_config(page_title="AIHealthPro Chatbot", page_icon=":brain:",layout="centered",)
 
 st.image("logo.png",width=100)
 
@@ -92,9 +93,15 @@ safety_settings = [
 
 
 
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+
+
+
+# Set up Google Gemini-Pro AI model
+
 gen_ai.configure(api_key=GOOGLE_API_KEY)
-version = 'models/gemini-1.5-flash-latest'
-model = genai.GenerativeModel(version)
+
+model = gen_ai.GenerativeModel('gemini-pro')
 
 
 
@@ -122,9 +129,9 @@ if "chat_session" not in st.session_state:
 
 with st.sidebar:
     selected = option_menu(
-        menu_title="Money Maven Chatbot",
-        options=["FinanceBot", "VisionBot", "Chat with Report"],
-        icons=["wallet", "eye", "file-earmark-text"],  # Add an icon for the new option
+        menu_title="AIHealthPro Chatbot",
+        options=["DocBot", "VisionBot", "Chat with Report"],  # Add the new option
+        icons=["robot", "eye", "file-earmark-text"],  # Add an icon for the new option
         default_index=0,
         orientation="vertical",
 )
@@ -153,12 +160,18 @@ with st.sidebar:
 
 
 
-    if selected == "FinanceBot":
-        st.write("💵 **FinanceBot** - Engage in text-based financial conversations.")
+    if selected == "DocBot":
+
+        st.write("🧑‍⚕️ **DocBot** - Engage in text-based medical conversations.")
+
     elif selected == "VisionBot":
-        st.write("👁 **VisionBot** - Analyze and interpret financial documents.")
+
+        st.write("👁 **VisionBot** - Analyze and interpret medical images.")
     elif selected == "Chat with Report":
-        st.write("📄 **Chat with Report** - Ask questions about uploaded financial reports.")
+        st.write("📄 **Chat with Report** - Ask questions about uploaded documents.")
+
+if selected == "Chat with Report":
+    st.title("📄 Chat with Report")
     # Ensure the API key is loaded correctly
     google_api_key = os.getenv("GOOGLE_API_KEY")
     if not google_api_key:
@@ -169,8 +182,8 @@ with st.sidebar:
     question = st.text_input("Enter your question")
 
     system_prompt = """
-    You are a financial advisor who answers user queries from the given CONTEXT.
-    You help users understand and analyze financial reports. You can extract key findings, explain financial terminology, and answer questions related to budgeting, investments, and personal finance. 
+    You are a text summarizer who answers user query from the given CONTEXT.
+    You are a medical expert assistant who helps healthcare professionals understand and analyze medical reports. You can extract key findings, explain medical terminology, and answer questions related to diagnosis, treatment, and prognosis. 
     You are honest, to the point, coherent and don't hallucinate.
     If the user query is not in context, simply tell `We are sorry, we don't have information on this`.
     """
@@ -191,10 +204,12 @@ with st.sidebar:
         response = pipeline.call()
         st.write(response)
     
-    elif selected == "DocBot":
+
+elif selected == "DocBot":
 
     # Display the chatbot's title on the page
-        st.title("🧑‍⚕️ Docbot-AIHealthPro™")
+
+    st.title("🧑‍⚕️ Docbot-AIHealthPro™")
 
 
 
@@ -243,52 +258,99 @@ with st.sidebar:
         with st.chat_message("assistant"):
 
             st.markdown(gemini_response.text)
-    elif selected == "VisionBot":
-    st.header("👁 VisionBot - Money Maven")
+
+
+
+elif selected == "VisionBot":
+
+    st.header("👁 Visionbot-AIHealthPro™")
+
     st.write("")
 
+
+
     image_prompt = st.text_input("Interact with the Image", placeholder="Prompt", label_visibility="visible")
+
     uploaded_file = st.file_uploader("Choose an Image", accept_multiple_files=False, type=["png", "jpg", "jpeg", "img", "webp"])
 
+
+
     if uploaded_file is not None:
+
         st.image(Image.open(uploaded_file), use_column_width=True)
+
         st.markdown("""
+
             <style>
+
             img {
+
                 border-radius: 10px;
+
             }
+
             </style>
+
         """, unsafe_allow_html=True)
 
-    if st.button("GET RESPONSE", use_container_width=True):
-        model = gen_ai.GenerativeModel("gemini-pro-vision")
-        if uploaded_file is not None:
-            if image_prompt != "":
-                image = Image.open(uploaded_file)
-                response = model.generate_content(
-                    glm.Content(
-                        parts=[
-                            glm.Part(text=image_prompt),
-                            glm.Part(
-                                inline_data=glm.Blob(
-                                    mime_type="image/jpeg",
-                                    data=image_to_byte_array(image)
-                                )
-                            )
-                        ]
-                    ),
-                    safety_settings=safety_settings
-                )
-                response.resolve()
-                st.write("")
-                st.write(":blue[Response]")
-                st.write("")
-                st.markdown(response.text)
-            else:
-                st.write("")
-                st.header(":red[Please Provide a prompt]")
-        else:
-            st.write("")
-            st.header(":red[Please Provide an image]")
 
-   
+
+    if st.button("GET RESPONSE", use_container_width=True):
+
+        model = gen_ai.GenerativeModel("gemini-pro-vision")
+
+        if uploaded_file is not None:
+
+            if image_prompt != "":
+
+                image = Image.open(uploaded_file)
+
+                response = model.generate_content(
+
+                    glm.Content(
+
+                        parts=[
+
+                            glm.Part(text=image_prompt),
+
+                            glm.Part(
+
+                                inline_data=glm.Blob(
+
+                                    mime_type="image/jpeg",
+
+                                    data=image_to_byte_array(image)
+
+                                )
+
+                            )
+
+                        ]
+
+                    ),
+
+                    safety_settings=safety_settings
+
+                )
+
+                response.resolve()
+
+                st.write("")
+
+                st.write(":blue[Response]")
+
+                st.write("")
+
+                st.markdown(response.text)
+
+            else:
+
+                st.write("")
+
+                st.header(":red[Please Provide a prompt]")
+
+        else:
+
+            st.write("")
+
+            st.header(":red[Please Provide an image]")
