@@ -243,10 +243,7 @@ with st.sidebar:
         with st.chat_message("assistant"):
 
             st.markdown(gemini_response.text)
-
-
-
-elif selected == "VisionBot":
+    elif selected == "VisionBot":
 
     st.header("👁 Visionbot-AIHealthPro™")
 
