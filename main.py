@@ -2,9 +2,9 @@ import streamlit as st
 
 from pathlib import Path
 
-st.set_page_config(page_title="AIHealthPro Chatbot", page_icon=":brain:",layout="centered",)
+st.set_page_config(page_title="Money Maven Chatbot", page_icon="💰", layout="centered")
 
-st.image("logo.png",width=100)
+st.image("logo.png",width=200)
 
 from beyondllm import source, retrieve, embeddings, llms, generator
 from beyondllm.llms import GeminiModel
@@ -98,10 +98,9 @@ GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
 
 # Set up Google Gemini-Pro AI model
+version = 'models/gemini-1.5-pro-latest'
+model = genai.GenerativeModel(version)
 
-gen_ai.configure(api_key=GOOGLE_API_KEY)
-
-model = gen_ai.GenerativeModel('gemini-pro')
 
 
 
